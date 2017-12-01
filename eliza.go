@@ -42,6 +42,36 @@ func main{
 
 	ElizaResponse()
 }
+func pronouns(input string) string {
+	sent := strings.Fields(input)
+
+	// Map of string to string key-value pairs, to substitute pronouns
+ 	// List of substitutions adapted from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
+	pronouns := Map[string]string{
+		"i":      "you",
+		"me":     "you",
+		"you":    "I",
+ 		"was":    "were",
+		"your":   "my",
+ 		"yours":  "mine",
+		"my":     "your",
+ 		"i'd":    "you would",
+ 		"i've":   "you have",
+ 		"i'll":   "you will",
+ 		"are":    "am",
+ 		"you've": "I have",
+ 		"you'll": "I will",
+ 				
+	}
+
+	for index, word := range sent {
+		if value, ok := pronouns[strings.ToLower(word)];
+		ok{
+			sent[index] = value;
+		}
+	}
+	return strings.Join(sent, " ")
+}
 
 
 func ElizaResponse (input string) string {
@@ -58,13 +88,16 @@ func ElizaResponse (input string) string {
 	if regex.matStr(input) {
 		return "Why don’t you tell me more about your father?"
 	}
-
-	// 3) "I AM"
-	re := RegExpress.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+	else{
+		re := RegExpress.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+	}
 
 	if re.matStr(input) {
 		return re.ReplaceAll(input, "How do you know you are $1?")
 	}
+
+	capture = pronouns(capture)
+
 	// Returns random choice of responses
 	return choice(responses)
 
