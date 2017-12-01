@@ -21,3 +21,8 @@ MUST HAVE GIT & GO
 
 2.Command Prompt involves simply going to download the repository via the terminal/cmd 
   > cd "Folder"
+
+
+3.BUILD & RUN
+  > go build eliza.go
+  > go run eliza.exe
