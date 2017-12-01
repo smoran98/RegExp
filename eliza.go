@@ -1,18 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
 	"math/rand"
-	"os"
 	"regexp"
-	"strconv"
 	"strings"
-	"time"
 )
 
-func main{
+func main(){
 
 	var responses = []string {
 
@@ -31,7 +26,7 @@ func main{
 	}
 
 
-	for i := 0; i < length(responses); i++ {
+	for i := 0; i < len(responses); i++ {
 		fmt.Println(responses[i])
 		fmt.Println(ElizaResponse(responses[i]))
 	}
@@ -39,15 +34,13 @@ func main{
 	// http.Handle("/", http.FileServer(http.Dir("./static")))
 	// http.HandleFunc("/user-input", handleEliza)
 	// http.ListenAndServe(":8080", nil)
-
-	ElizaResponse()
 }
 func pronouns(input string) string {
 	sent := strings.Fields(input)
 
 	// Map of string to string key-value pairs, to substitute pronouns
  	// List of substitutions adapted from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
-	pronouns := Map[string]string{
+	var pronouns = map[string]string{
 		"i":      "you",
 		"me":     "you",
 		"you":    "I",
@@ -65,9 +58,8 @@ func pronouns(input string) string {
 	}
 
 	for index, word := range sent {
-		if value, ok := pronouns[strings.ToLower(word)];
-		ok{
-			sent[index] = value;
+		if value, ok := pronouns[strings.ToLower(word)]; ok{
+			sent[index] = value
 		}
 	}
 	return strings.Join(sent, " ")
@@ -82,21 +74,20 @@ func ElizaResponse (input string) string {
 	}
 	
 	// 2) Recognise Father
-	regex, _ := RegExpress.Compile("father")
+	reg,_ := regexp.Compile("father")
 
 	// Match String' for Father
-	if regex.matStr(input) {
+	if reg.MatchString(input) {
 		return "Why don’t you tell me more about your father?"
-	}
-	else{
-		re := RegExpress.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+	}	
+	
+	re := regexp.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+
+	if re.MatchString(input) {
+		return re.ReplaceAllString(input, "How do you know you are $1?")
 	}
 
-	if re.matStr(input) {
-		return re.ReplaceAll(input, "How do you know you are $1?")
-	}
-
-	capture = pronouns(capture)
+	//capture := pronouns(capture)
 
 	// Returns random choice of responses
 	return choice(responses)
@@ -105,6 +96,6 @@ func ElizaResponse (input string) string {
 
 // Returns random string from list
 func choice(input []string) string {
-	randIndex := rand.Intn(length(input))
+	randIndex := rand.Intn(len(input))
 	return input[randIndex]
 }
