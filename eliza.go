@@ -45,6 +45,14 @@ func ElizaResponse (input string) string {
 		"Why do you say that?",
 	}
 	
+	// 2) Recognise Father
+	regex, _ := RegExpress.Compile("father")
+
+	// Match String' for Father
+	if regex.matStr(input) {
+		return "Why don’t you tell me more about your father?"
+	}
+	
 	// Returns random choice of responses
 	return choice(responses)
 
