@@ -15,4 +15,9 @@ https://stackoverflow.com/
 # Running the Code
 MUST HAVE GIT & GO
 
-1.
+1.Clone Repository by opening Command Prompt in folder in which you wish to download and do ......
+  > git clone https://github.com/smoran98/RegExp
+
+
+2.Command Prompt involves simply going to download the repository via the terminal/cmd 
+  > cd "Folder"
