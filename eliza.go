@@ -22,6 +22,12 @@ func main{
 		"I’m looking forward to the weekend.",
 		"My grandfather was French!",
 
+		// 3) "I AM"
+		"I am happy.",
+		"I am not happy with your responses.",
+		"I am not sure that you understand the effect that your questions are having on me.",
+		"I am supposed to just take what you’re saying at face value?",
+
 	}
 
 
@@ -52,7 +58,13 @@ func ElizaResponse (input string) string {
 	if regex.matStr(input) {
 		return "Why don’t you tell me more about your father?"
 	}
-	
+
+	// 3) "I AM"
+	re := RegExpress.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+
+	if re.matStr(input) {
+		return re.ReplaceAll(input, "How do you know you are $1?")
+	}
 	// Returns random choice of responses
 	return choice(responses)
 
